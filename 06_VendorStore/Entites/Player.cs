@@ -2,7 +2,7 @@
 
 namespace _06_VendorStore.Entites
 {
-    internal class Player : IPlayer
+    internal class Player : IPlayer//Игрок не должен выводить информацию в консоль.
     {
         public int CoinsBag { get; private set; }
 
@@ -12,7 +12,6 @@ namespace _06_VendorStore.Entites
         {
             CoinsBag = coinsInBag;
         }
-
 
         public void BuyGoods(IVendor vendor, params IGood[] goods)
         {
@@ -51,7 +50,7 @@ namespace _06_VendorStore.Entites
             {
                 Console.WriteLine($"Try buy {item} from vendor");
                 var dealResult = vendor.TryTrade(item, this);
-                if (dealResult is null)
+                if (dealResult is null)//Вынужденная проверка на null...
                 {
                     Console.WriteLine($"Cant buy {item}");
                 }
@@ -84,9 +83,9 @@ namespace _06_VendorStore.Entites
             }
         }
 
-        public int PayCoins(int coinsCount)
+        public int PayCoins(int coinsCount) //Определись, что делает этот метод и что именно он должен возвращать!
         {
-            return CoinsBag -= coinsCount;
+            return CoinsBag -= coinsCount;//А если мы в минус уйдем - как тогда? Никто не запрещает нам вызвать этот метод отдельно от CanPayCoins, а он еще и публичный...
         }
 
         public void LookBackPack()
