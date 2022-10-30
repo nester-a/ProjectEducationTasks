@@ -7,5 +7,5 @@ namespace _02_PropsWork.Entities
         public int X { get; set; }
 
         public int Y { get; set; }
-    }
+    }//Опционально было бы неплохо иметь 2 конструстора - один без параметров, другой на вход принимает х и y координаты.
 }
