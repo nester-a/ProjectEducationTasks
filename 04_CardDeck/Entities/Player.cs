@@ -4,6 +4,7 @@ namespace _04_CardDeck.Entities
 {
     internal class Player : IPlayer
     {
+        //Модификаторы полей нужно указывать явно
         List<ICard> _cards = new();
 
         public void GetCard(ICardDeck cardDeck)
