@@ -3,8 +3,10 @@
 namespace _05_BooksRepository.Entities
 {
     internal class BookRepository : IBooksRepository
+        //Это же хранилище для книг - почему оно выводит информацию в консоль?
+        //Оно должно только работать с данными или передавать информацию о записях наружу.
     {
-        List<IBook> _books = new();
+        List<IBook> _books = new();//где private?
 
         public BookRepository(BooksSeeder seeder, int booksCount)
         {
@@ -20,8 +22,11 @@ namespace _05_BooksRepository.Entities
         {
             var book = _books.FirstOrDefault(x => x.Title == bookTitle);
             if (book is null)
-                throw new ArgumentException("Book with this title not found");
-
+                throw new ArgumentException("Book with this title not found");//was not found - а вообще зачем тут, да и в других местах, вывод в консоль на английском?
+            
+            //И да книга не найдена, это нормально. Зачем же выбрасывать исключение?
+            //Выбран неверный тип для исключения - тут подойдет InvalidOperationException            
+                     
             _books.Remove(book);
             return book;
         }
@@ -36,7 +41,9 @@ namespace _05_BooksRepository.Entities
 
             Console.WriteLine("Repository has next books:");
             foreach (var book in _books)
+            //{ Мое пожелание - оборачивать такие конструкции в фигурные скобки.
                 Console.WriteLine(book);
+            //}
         }
 
         public void ShowBooks(string bookTitle)

@@ -13,20 +13,20 @@ namespace _05_BooksRepository.Entities
         {
             FirstName = firstName;
             LastName = lastName;
-        }
-        public override string ToString()
+        }//Пустая строка после метода
+        public override string ToString()//Про это говорилось раньше.
         {
             return $"{FirstName} {LastName}";
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object? obj)//Этот код нигде не используется. Значит его можно было не писать)
         {
             if (obj is null || obj is not IAuthor)
                 return false;
 
             var author = obj as IAuthor;
 
-            return author!.FirstName.Equals(FirstName) && author.LastName.Equals(LastName);
+            return author!.FirstName.Equals(FirstName) && author.LastName.Equals(LastName);// author! - восклицательный знак  - это что и зачем?
         }
     }
 }

@@ -4,7 +4,7 @@ namespace _05_BooksRepository.Entities
 {
     internal class Book : IBook
     {
-        public IAuthor Author { get; }
+        public IAuthor Author { get; }//не хочу повторяться, но private set: указывать нужно явно.
 
         public int ReleaseYear { get; }
 
@@ -17,7 +17,7 @@ namespace _05_BooksRepository.Entities
             Author = author;
         }
 
-        public override string ToString()
+        public override string ToString()//Я написал мысли по этому поводу в предыдущей задаче.
         {
             return $"\"{Title}\", Author:{Author}, Release year:{ReleaseYear}";
         }
