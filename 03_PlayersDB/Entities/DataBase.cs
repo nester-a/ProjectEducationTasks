@@ -85,16 +85,23 @@ namespace _03_PlayersDB.Entities
 
             return true;
         }
-        public string GetInfo()
+        public IEnumerable<Cell> GetInfo()
         {
-            var sb = new StringBuilder();
-            sb.Append("ID\tNAME\tLEVEL\tBANNED\n");
+            var cells = new List<Cell>(){
+                new Cell("ID", ConsoleColor.DarkBlue),
+                new Cell("NAME", ConsoleColor.DarkBlue),
+                new Cell("LEVEL", ConsoleColor.DarkBlue),
+                new Cell("BANNED", ConsoleColor.DarkBlue),
+                new Cell("\n")
+            };
+
             foreach (var player in _players)
             {
-                sb.Append(player.GetInfo());
-                sb.Append("\n");
+                cells.AddRange(player.GetInfo());
+                cells.Add(new Cell("\n"));
             }
-            return sb.ToString();
+
+            return cells;
         }
     }
 }

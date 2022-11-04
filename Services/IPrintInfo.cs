@@ -2,6 +2,6 @@ namespace Services
 {
     public interface IPrintInfo
     {
-        string GetInfo();
+        IEnumerable<Cell> GetInfo();
     }
 }

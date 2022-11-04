@@ -15,9 +15,18 @@ namespace _03_PlayersDB.Entities
 
         public bool IsBanned { get; set; } = false;
 
-        public string GetInfo()
+        public IEnumerable<Cell> GetInfo()
         {
-            return $"{Id}\t{Name}\t{Level}\t{IsBanned}";
+            ConsoleColor bannedColor = IsBanned ? ConsoleColor.DarkRed : ConsoleColor.White;
+
+            var cells = new List<Cell>(){
+                new Cell(Id.ToString(), bannedColor),
+                new Cell(Name, bannedColor),
+                new Cell(Level.ToString(), bannedColor),
+                new Cell(IsBanned.ToString(), bannedColor)
+            };
+            
+            return cells;
         }
     }
 }
