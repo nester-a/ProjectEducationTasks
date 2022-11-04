@@ -4,42 +4,51 @@ namespace _03_PlayersDB.Entities
 {
     internal class DataBase : IDataBase
     {
-        List<IPlayer> _players = new();//Офтоп - не люблю этот новый "сахар" new() в языке
+        private List<IPlayer> _players = new List<IPlayer>();
+
+        private int _currentId = 0;
+
         public int AddPlayer(IPlayer player)
-        {
-            int id = _players.Count + 1;//Тут косяк,
-                                        //добавляешь 3х игроков id: 1, 2, 3.
-                                        //Удаляешь 2го id: 1, 3.
-                                        //Добавлешь еще 1го id: 1, 3, 3.
-                                        // У тебя коллизия в поле id 3 и 3. Такого быть не должно!
-            player.Id = id;
+        {                    
+            player.Id = ++_currentId;
+
             _players.Add(player);
 
-            return id;
+            return _currentId;
+        }
+
+        public int AddPlayers(IEnumerable<IPlayer> players)
+        {
+            if(!players.Any())
+            {
+                return 0;
+            }
+
+            foreach (var player in players)
+            {
+                AddPlayer(player);
+            }
+
+            return players.Count();
         }
 
         public bool BanPlayer(int playerId)
         {
-            var player = _players.FirstOrDefault(p => p.Id == playerId);
+            var player = GetPlayer(playerId);
+
             if (player is null)
+            {
                 return false;
-                //Моя личная просьба - выражения из одного оператора оборачивать в фигурные скобки. Например:
-                //{
-                //    return false;
-                //}
-                //Так проще читать.
+            }
 
             player.IsBanned = true;
+
             return true;
         }
 
-        public IPlayer GetPlayer(int playerId)
+        public IPlayer? GetPlayer(int playerId)
         {
-            var player = _players.FirstOrDefault(p => p.Id == playerId);
-            if (player is null)
-                throw new ArgumentException("Player with this Id not found");//Тут программа сломалась - а что делать дальше?
-
-            return player;
+            return _players.FirstOrDefault(p => p.Id == playerId);
         }
 
         public IEnumerable<IPlayer> GetPlayers()
@@ -47,24 +56,31 @@ namespace _03_PlayersDB.Entities
             return _players;
         }
 
-        public IPlayer RemovePlayer(int playerId)
+        public IPlayer? RemovePlayer(int playerId)
         {
-            var player = _players.FirstOrDefault(p => p.Id == playerId);
+            var player = GetPlayer(playerId);
+
             if (player is null)
-                throw new ArgumentException("Player with this Id not found");
+            {
+                return player;
+            }
 
             _players.Remove(player);
 
             return player;
         }
 
-        public bool RemovePlayerBan(int playerId)
+        public bool UnbanPlayer(int playerId)
         {
-            var player = _players.FirstOrDefault(p => p.Id == playerId);
+            var player = GetPlayer(playerId);
+
             if (player is null)
+            {
                 return false;
+            }
 
             player.IsBanned = false;
+
             return true;
         }
     }

@@ -2,11 +2,18 @@
 {
     internal interface IDataBase
     {
-        int AddPlayer(IPlayer player);//Пустые строки меж методами
+        int AddPlayer(IPlayer player);
+
+        int AddPlayers(IEnumerable<IPlayer> players);
+        
         bool BanPlayer(int playerId);
-        bool RemovePlayerBan(int playerId);//RemovePlayerFromBanList или лучше UnbanPlayer
-        IPlayer GetPlayer(int playerId);
-        IPlayer RemovePlayer(int playerId);
+
+        bool UnbanPlayer(int playerId);
+        
+        IPlayer? GetPlayer(int playerId);
+
+        IPlayer? RemovePlayer(int playerId);
+        
         IEnumerable<IPlayer> GetPlayers();
     }
 }

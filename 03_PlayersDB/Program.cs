@@ -1,3 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-//А где собственно использование базы данных - там вариант её потыкать из консоли?
+﻿using _03_PlayersDB.Entities;
+using Services;
+
+var factory = new PlayerFactory();
+var players = factory.CreatePlayers(100);
+
+var db = new DataBase();
+db.AddPlayers(players);
+
+
+
+Console.WriteLine("Программа выполнена");
+Console.ReadLine();
