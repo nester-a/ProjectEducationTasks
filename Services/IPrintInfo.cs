@@ -2,6 +2,6 @@ namespace Services
 {
     public interface IPrintInfo
     {
-        string PrintInfo();
+        string GetInfo();
     }
 }

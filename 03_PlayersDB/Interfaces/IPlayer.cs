@@ -1,6 +1,8 @@
-﻿namespace _03_PlayersDB.Interfaces
+﻿using Services;
+
+namespace _03_PlayersDB.Interfaces
 {
-    internal interface IPlayer
+    internal interface IPlayer: IPrintInfo
     {
         int Id { get; set; }
 

@@ -1,6 +1,8 @@
-﻿namespace _03_PlayersDB.Interfaces
+﻿using Services;
+
+namespace _03_PlayersDB.Interfaces
 {
-    internal interface IDataBase
+    internal interface IDataBase : IPrintInfo
     {
         int AddPlayer(IPlayer player);
 
@@ -15,5 +17,6 @@
         IPlayer? RemovePlayer(int playerId);
         
         IEnumerable<IPlayer> GetPlayers();
+
     }
 }

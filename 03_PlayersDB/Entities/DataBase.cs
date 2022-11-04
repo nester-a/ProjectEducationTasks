@@ -1,8 +1,10 @@
 ﻿using _03_PlayersDB.Interfaces;
+using Services;
+using System.Text;
 
 namespace _03_PlayersDB.Entities
 {
-    internal class DataBase : IDataBase
+    internal class DataBase : IDataBase, IPrintInfo
     {
         private List<IPlayer> _players = new List<IPlayer>();
 
@@ -82,6 +84,17 @@ namespace _03_PlayersDB.Entities
             player.IsBanned = false;
 
             return true;
+        }
+        public string GetInfo()
+        {
+            var sb = new StringBuilder();
+            sb.Append("ID\tNAME\tLEVEL\tBANNED\n");
+            foreach (var player in _players)
+            {
+                sb.Append(player.GetInfo());
+                sb.Append("\n");
+            }
+            return sb.ToString();
         }
     }
 }
